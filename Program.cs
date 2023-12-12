@@ -13,8 +13,9 @@ namespace Arabic_Arena
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins("https://arabicarena.netlify.app")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+
             });
 
             // Add services to the container
