@@ -31,7 +31,7 @@ namespace Arabic_Arena
 
             app.UseHttpsRedirection();
             app.UseCors(policy =>
-                policy.WithOrigins("http://localhost:3000") // Replace with your React app's URL
+                policy.WithOrigins("https://arabicarena.netlify.app") // Replace with your React app's URL
                       .AllowAnyHeader()
                       .AllowAnyMethod());
             app.UseAuthorization();
