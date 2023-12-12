@@ -9,6 +9,14 @@ namespace Arabic_Arena
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("https://arabicarena.netlify.app")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             // Add services to the container
             var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
             builder.Services.AddSingleton(mongoDbSettings);
@@ -30,10 +38,7 @@ namespace Arabic_Arena
             }
 
             app.UseHttpsRedirection();
-            app.UseCors(policy =>
-                policy.WithOrigins("https://arabicarena.netlify.app") // Replace with your React app's URL
-                      .AllowAnyHeader()
-                      .AllowAnyMethod());
+            app.UseCors("AllowSpecificOrigin");
             app.UseAuthorization();
 
 
