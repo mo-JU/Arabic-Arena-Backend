@@ -6,41 +6,41 @@ public class Lesson
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public string id { get; set; }
 
-    public string TitleArabic { get; set; }
-    public string TitleEnglish { get; set; }
-    public string Level { get; set; }
-    public string Type { get; set; }
-    public bool Video { get; set; }
-    public string VideoLink { get; set; }
-    public string VideoText { get; set; }
-    public string Text { get; set; }
-    public bool HasTable { get; set; }
+    public string titleArabic { get; set; }
+    public string titleEnglish { get; set; }
+    public string level { get; set; }
+    public string type { get; set; }
+    public bool video { get; set; }
+    public string videoLink { get; set; }
+    public string videoText { get; set; }
+    public string text { get; set; }
+    public bool hasTable { get; set; }
 
-    [BsonElement("Table")]
-    public List<TableItem> Table { get; set; }
+    [BsonElement("table")]
+    public List<TableItem> table { get; set; }
 
-    public bool HasExercises { get; set; }
+    public bool hasExercises { get; set; }
 
-    [BsonElement("Exercises")]
-    public List<Exercise> Exercises { get; set; }
+    [BsonElement("exercises")]
+    public List<Exercise> exercises { get; set; }
 
-    public string ImageLink { get; set; }
+    public string imageLink { get; set; }
 }
 
 public class TableItem
 {
-    public string ArabicWord { get; set; }
-    public string Transcription { get; set; }
+    public string arabicWord { get; set; }
+    public string transcription { get; set; }
 }
 
 public class Exercise
 {
-    public string QuestionArabic { get; set; }
-    public string QuestionEnglish { get; set; }
-    public string QuestionType { get; set; }
-    public string AudioWord { get; set; }
-    public List<string> Options { get; set; }
-    public List<string> CorrectAnswer { get; set; }
+    public string questionArabic { get; set; }
+    public string questionEnglish { get; set; }
+    public string questionType { get; set; }
+    public string audioWord { get; set; }
+    public List<string> options { get; set; }
+    public List<string> correctAnswer { get; set; }
 }
