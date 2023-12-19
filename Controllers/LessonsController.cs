@@ -24,9 +24,9 @@ namespace Arabic_Arena.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Lesson>>> Get()
         {
-            //   var lessons = await _lessonsCollection.Find(_ => true).ToListAsync();
-            // return Ok(lessons);
-            var lesson = new Lesson
+              var lessons = await _lessonsCollection.Find(_ => true).ToListAsync();
+             return Ok(lessons);
+           /* var lesson = new Lesson
             {
                 titleArabic = "فوائد الشاي الأخضر",
                 titleEnglish = "Benefits of Green Tea",
@@ -66,7 +66,7 @@ namespace Arabic_Arena.Controllers
     },
     imageLink = "https://assets.rbl.ms/19152954/origin.jpg"
 };
-            return Ok(lesson);
+            return Ok(lesson);*/
     }
 
         // Get a lesson by ID

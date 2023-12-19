@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class Lesson
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
+    
     public string id { get; set; }
 
     public string titleArabic { get; set; }
