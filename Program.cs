@@ -1,5 +1,6 @@
 using Arabic_Arena.Config;
 using Arabic_Arena.Services;
+using MongoDB.Driver;
 
 namespace Arabic_Arena
 {
@@ -21,8 +22,13 @@ namespace Arabic_Arena
             // Add services to the container
             var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
             builder.Services.AddSingleton(mongoDbSettings);
+            builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var connectionString = configuration.GetConnectionString("ConnectionString");
+                return new MongoClient(connectionString);
+            });
             builder.Services.AddSingleton<MongoDbContext>();
-
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
