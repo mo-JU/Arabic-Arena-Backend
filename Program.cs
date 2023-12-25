@@ -12,20 +12,11 @@ namespace Arabic_Arena
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("https://arabicarena.netlify.app")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-
-            });
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("https://arabicarenaadmin.netlify.app")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-
+                options.AddPolicy("arabicarena",
+                    builder => builder
+                        .WithOrigins("https://arabicarena.netlify.app", "https://arabicarenaadmin.netlify.app")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
             });
             // Add services to the container
             var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
@@ -53,7 +44,7 @@ namespace Arabic_Arena
             }
 
             app.UseHttpsRedirection();
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors("arabicarena");
             app.UseAuthorization();
 
 

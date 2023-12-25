@@ -1,4 +1,5 @@
 ﻿using Arabic_Arena.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
@@ -6,6 +7,8 @@ namespace Arabic_Arena.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("arabicarena")]
+
     public class LessonsController : ControllerBase
     {
         private readonly IMongoCollection<Lesson> _lessonsCollection;
