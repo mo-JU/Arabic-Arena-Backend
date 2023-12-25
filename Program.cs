@@ -19,6 +19,14 @@ namespace Arabic_Arena
 
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("https://arabicarenaadmin.netlify.app")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+
+            });
             // Add services to the container
             var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
             builder.Services.AddSingleton(mongoDbSettings);
