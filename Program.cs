@@ -18,7 +18,6 @@ namespace Arabic_Arena
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             });
-            // Add services to the container
             var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
             builder.Services.AddSingleton(mongoDbSettings);
             builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
@@ -30,13 +29,11 @@ namespace Arabic_Arena
             builder.Services.AddSingleton<MongoDbContext>();
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

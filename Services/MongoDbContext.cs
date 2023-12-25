@@ -12,15 +12,15 @@ namespace Arabic_Arena.Services
         public MongoDbContext(MongoDbSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
-            _database = client.GetDatabase("ArabicArenaDB"); // Replace with your actual database name
+            _database = client.GetDatabase("ArabicArenaDB"); 
         }
 
-        // You can add methods here to access collections, perform CRUD operations, etc.
         public IMongoCollection<Lesson> Lessons => _database.GetCollection<Lesson>("Lessons");
         public IMongoCollection<Word> Words => _database.GetCollection<Word>("Words");
         public IMongoCollection<Quiz> Quizzes => _database.GetCollection<Quiz>("Quiz");
         public IMongoCollection<PlacementTest> Placement => _database.GetCollection<PlacementTest>("Placement");
         public IMongoCollection<Admin> Admin => _database.GetCollection<Admin>("Admin");
+        public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
 
     }
 }
