@@ -15,7 +15,7 @@ namespace Arabic_Arena.Controllers
 
         public LessonsController(MongoDbContext context)
         {
-            _lessonsCollection = context.Lessons; // Replace with your actual collection name
+            _lessonsCollection = context.Lessons;
         }
 
         [HttpGet]
@@ -35,19 +35,17 @@ namespace Arabic_Arena.Controllers
 
             return Ok(lessons);
         }
-        // Get a lesson by ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Lesson>> Get(string id)
+
+        [HttpGet("{titleEnglish}")]
+        public async Task<ActionResult<Lesson>> Get(string titleEnglish)
         {
-            var lesson = await _lessonsCollection.Find(lesson => lesson.id == id).FirstOrDefaultAsync();
+            var lesson = await _lessonsCollection.Find(lesson => lesson.titleEnglish.ToLower() == titleEnglish.ToLower()).FirstOrDefaultAsync();
             if (lesson == null)
             {
                 return NotFound();
             }
             return Ok(lesson);
         }
-
-        // Create a new lesson
 
         [HttpPost]
         public async Task<ActionResult<Lesson>> Create(Lesson lesson)
@@ -56,7 +54,6 @@ namespace Arabic_Arena.Controllers
             return CreatedAtAction(nameof(Get), new { id = lesson.id }, lesson);
         }
 
-        // Update a lesson
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, Lesson updatedLesson)
         {
@@ -68,7 +65,6 @@ namespace Arabic_Arena.Controllers
             return NoContent();
         }
 
-        // Delete a lesson
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

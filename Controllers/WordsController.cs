@@ -19,7 +19,7 @@ namespace Arabic_Arena.Controllers
                 _wordsCollection = context.Words;
             }
 
-            [HttpGet("id")]
+            [HttpGet("{id}")]
             public async Task<ActionResult<Word>> Get(string id)
             {
                 var word = await _wordsCollection.Find(word => word.id == id).FirstOrDefaultAsync();
