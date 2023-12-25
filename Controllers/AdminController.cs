@@ -33,10 +33,15 @@ namespace Arabic_Arena.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, Admin user)
+        public async Task<IActionResult> Update(string id, ChangePassword user)
         {
-            user.password = HashingServices.HashPassword(user.password);
-            var result = await _adminCollection.ReplaceOneAsync(admin => admin.id == id, user);
+            var admin = await _adminCollection.Find(admin => admin.id == id).FirstOrDefaultAsync();
+            if (admin == null || !(HashingServices.VerifyPassword(admin.password, user.password)))
+            {
+                return Unauthorized();
+            }
+            admin.password = HashingServices.HashPassword(user.newPassword);
+            var result = await _adminCollection.ReplaceOneAsync(admin => admin.id == id,admin);
             if (result.ModifiedCount == 0)
             {
                 return NotFound();
