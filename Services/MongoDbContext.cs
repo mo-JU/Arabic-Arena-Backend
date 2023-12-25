@@ -19,5 +19,7 @@ namespace Arabic_Arena.Services
         public IMongoCollection<Lesson> Lessons => _database.GetCollection<Lesson>("Lessons");
         public IMongoCollection<Word> Words => _database.GetCollection<Word>("Words");
         public IMongoCollection<Quiz> Quizzes => _database.GetCollection<Quiz>("Quiz");
+        public IMongoCollection<PlacementTest> Placement => _database.GetCollection<PlacementTest>("Placement");
+
     }
 }
