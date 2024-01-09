@@ -32,7 +32,7 @@ namespace Arabic_Arena.Controllers
             var lessons = await _lessonsCollection.Find( _ => true)
                 .Project<Lesson>(projection)
                 .ToListAsync();
-
+            lessons.Reverse();
             return Ok(lessons);
         }
 

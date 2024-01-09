@@ -21,6 +21,7 @@ namespace Arabic_Arena.Services
         public IMongoCollection<PlacementTest> Placement => _database.GetCollection<PlacementTest>("Placement");
         public IMongoCollection<Admin> Admin => _database.GetCollection<Admin>("Admin");
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+        public IMongoCollection<Feedback> Feedback => _database.GetCollection<Feedback>("Feedback");
 
     }
 }

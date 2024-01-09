@@ -35,6 +35,7 @@ namespace Arabic_Arena.Controllers
         public async Task<ActionResult<IEnumerable<QuizDto>>> Get()
         {
             var quizzes = await _quizzesCollection.Find(_ => true).ToListAsync();
+            quizzes.Reverse();
 
             var quizzesDto = quizzes.Select(q => new QuizDto
             {
