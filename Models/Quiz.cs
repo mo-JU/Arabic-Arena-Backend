@@ -11,6 +11,7 @@ namespace Arabic_Arena.Models
         public string level { get; set; }
         public string type { get; set; }
         public int time { get; set; }
+        public string imageLink { get; set; }
 
         [BsonElement("questions")]
         public List<Question> questions { get; set; }

@@ -19,21 +19,36 @@ namespace Arabic_Arena.Controllers
             _quizzesCollection = context.Quizzes;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Quiz>>> Get()
+        public class QuizDto
         {
-            var projection = Builders<Quiz>.Projection
-                .Include(l => l.id)
-                .Include(l => l.titleArabic)
-                .Include(l => l.titleEnglish)
-                .Include(l => l.type)
-                .Include(l => l.level);
+            public string id { get; set; }
+            public string titleArabic { get; set; }
+            public string titleEnglish { get; set; }
+            public string level { get; set; }
+            public string type { get; set; }
+            public int time { get; set; }
+            public string imageLink { get; set; }
+            public int QuestionsCount { get; set; }
+        }
 
-            var quizzes = await _quizzesCollection.Find(_ => true)
-                .Project<Quiz>(projection)
-                .ToListAsync();
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<QuizDto>>> Get()
+        {
+            var quizzes = await _quizzesCollection.Find(_ => true).ToListAsync();
 
-            return Ok(quizzes);
+            var quizzesDto = quizzes.Select(q => new QuizDto
+            {
+                id = q.id,
+                titleArabic = q.titleArabic,
+                titleEnglish = q.titleEnglish,
+                level = q.level,
+                type = q.type,
+                time = q.time,
+                imageLink = q.imageLink,
+                QuestionsCount = q.questions?.Count ?? 0
+            });
+
+            return Ok(quizzesDto);
         }
 
         [HttpGet("{titleEnglish}")]
@@ -74,6 +89,12 @@ namespace Arabic_Arena.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+        [HttpGet("count")]
+        public async Task<ActionResult<long>> GetQuizzesCount()
+        {
+            var count = await _quizzesCollection.CountDocumentsAsync( _ => true);
+            return Ok(count);
         }
     }
 }

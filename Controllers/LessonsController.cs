@@ -75,5 +75,12 @@ namespace Arabic_Arena.Controllers
             }
             return NoContent();
         }
+
+        [HttpGet("count")]
+        public async Task<ActionResult<long>> GetLessonsCount()
+        {
+            var count = await _lessonsCollection.CountDocumentsAsync(_ => true);
+            return Ok(count);
+        }
     }
 }
