@@ -77,10 +77,15 @@ namespace Arabic_Arena.Controllers
         }
 
         [HttpGet("count")]
-        public async Task<ActionResult<long>> GetLessonsCount()
+        public async Task<ActionResult> GetLessonsCount()
         {
-            var count = await _lessonsCollection.CountDocumentsAsync(_ => true);
-            return Ok(count);
+            var lessons = await _lessonsCollection.Find(_ => true).ToListAsync();
+
+            var countByLevel = lessons
+                .GroupBy(lesson => lesson.level)
+                .ToDictionary(group => group.Key, group => group.Count());
+
+            return Ok(countByLevel);
         }
     }
 }

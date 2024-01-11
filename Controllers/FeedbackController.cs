@@ -24,11 +24,19 @@ namespace Arabic_Arena.Controllers
 
             return Ok(lessons);
         }
+
         [HttpPost]
         public async Task<ActionResult<Feedback>> Create(Feedback feedback)
         {
             await _feedbackCollection.InsertOneAsync(feedback);
             return CreatedAtAction(nameof(Get), new { id = feedback.id }, feedback);
+        }
+
+        [HttpGet("count")]
+        public async Task<ActionResult<long>> GetFeedbackCount()
+        {
+            var count = await _feedbackCollection.CountDocumentsAsync(_ => true);
+            return Ok(count);
         }
     }
 }

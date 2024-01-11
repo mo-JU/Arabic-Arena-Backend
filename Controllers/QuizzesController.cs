@@ -91,11 +91,17 @@ namespace Arabic_Arena.Controllers
             }
             return NoContent();
         }
+
         [HttpGet("count")]
-        public async Task<ActionResult<long>> GetQuizzesCount()
+        public async Task<ActionResult> GetQuizzesCount()
         {
-            var count = await _quizzesCollection.CountDocumentsAsync( _ => true);
-            return Ok(count);
+            var quizzes = await _quizzesCollection.Find(_ => true).ToListAsync();
+
+            var countByLevel = quizzes
+                .GroupBy(quiz => quiz.level)
+                .ToDictionary(group => group.Key, group => group.Count());
+
+            return Ok(countByLevel);
         }
     }
 }
