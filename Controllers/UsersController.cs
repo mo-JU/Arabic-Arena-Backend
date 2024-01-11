@@ -64,11 +64,6 @@ namespace Arabic_Arena.Controllers
             return NoContent();
         }
 
-        [HttpGet("count")]
-        public async Task<ActionResult<long>> GetUsersCount()
-        {
-            var count = await _usersCollection.CountDocumentsAsync(_ => true);
-            return Ok(count);
-        }
+
     }
 }
